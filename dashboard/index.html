@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols ranked by implied launch value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>Token Launch Radar</h1>
+    <p class="sub">Every protocol that still records no token, ranked by what its launch
+    would be worth — priced off the multiples of tokens that already trade.</p>
+    <nav class="nav">
+      <a href="#board" data-nav="board">Board</a>
+      <a href="#live" data-nav="live">Live comparables</a>
+      <a href="#method" data-nav="method">Methodology</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <section id="hero" class="hero" aria-label="Headline figures"></section>
+
+  <section id="view-board" class="view">
+    <div class="filters">
+      <input id="q" type="search" placeholder="Search name or slug…" aria-label="Search protocols">
+      <select id="f-cat" aria-label="Filter by category"><option value="">All categories</option></select>
+      <select id="f-chain" aria-label="Filter by chain"><option value="">All chains</option></select>
+      <label class="check"><input id="f-watch" type="checkbox"> Watchlist only</label>
+      <select id="f-sort" aria-label="Sort board">
+        <option value="implied">Sort: implied value</option>
+        <option value="tvl">Sort: TVL</option>
+        <option value="change">Sort: 7d change</option>
+        <option value="multiple">Sort: base multiple</option>
+        <option value="age">Sort: age</option>
+      </select>
+    </div>
+    <p id="count" class="count"></p>
+    <div class="tablewrap">
+      <table id="board-table">
+        <thead><tr>
+          <th>#</th><th>Protocol</th><th>Chains</th><th class="num">TVL</th>
+          <th class="num">7d</th><th class="num">Implied value</th>
+          <th class="num">Implied / TVL</th><th class="num">Base multiple</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note">Implied value is a comparable-based estimate, not a prediction.
+    Most protocols on this board may never issue a token.</p>
+  </section>
+
+  <section id="view-detail" class="view" hidden></section>
+
+  <section id="view-live" class="view" hidden>
+    <h2>Live-token comparables</h2>
+    <p>The traded protocols the multiples come from: market cap against TVL,
+    by market cap. These are the market's own values — never mixed into the
+    ranked board, which holds pre-token protocols only.</p>
+    <div class="tablewrap">
+      <table id="live-table">
+        <thead><tr>
+          <th>Protocol</th><th>Category</th><th class="num">TVL</th>
+          <th class="num">Market cap</th><th class="num">Mcap / TVL</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="view-method" class="view" hidden>
+    <h2>Methodology — model radar-2</h2>
+    <div id="method-body"></div>
+    <h3>Model sandbox</h3>
+    <p class="sandbox-note">A sandbox, clearly labelled: it re-ranks the board with
+    your own weights. It changes nothing in the official board above.</p>
+    <div class="sandbox">
+      <label>Growth weight <span id="gw-val">0.50</span>
+        <input id="gw" type="range" min="0" max="1" step="0.05" value="0.5"></label>
+      <label>Multiple scale <span id="ms-val">1.00</span>
+        <input id="ms" type="range" min="0.5" max="2" step="0.05" value="1"></label>
+    </div>
+    <p id="sandbox-count" class="count"></p>
+    <div class="tablewrap">
+      <table id="sandbox-board">
+        <thead><tr>
+          <th>#</th><th>Protocol</th><th class="num">TVL</th>
+          <th class="num">Sandbox implied</th><th class="num">Official rank</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer class="wrap foot">
+  <p>Snapshot: DefiLlama protocols, as of <span id="asof"></span>. Model radar-2.
+  An implied value is an estimate from comparable multiples, not a prediction
+  and not financial advice.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
